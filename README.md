@@ -1,20 +1,92 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Deliver.io - Sistema de Gestão de Entregas
 
-# Run and deploy your AI Studio app
+Sistema profissional e robusto para gestão de entregas, similar ao iFood/Rappi, com painéis para estabelecimentos, administradores e entregadores.
 
-This contains everything you need to run your app locally.
+## 🚀 Funcionalidades Implementadas
 
-View your app in AI Studio: https://ai.studio/apps/drive/1FemOnXFkH0K91LHVjqgxT2v-2msxWVYM
+### Frontend
+- ✅ Estrutura de componentes React com TypeScript
+- ✅ Gerenciamento de estado com Zustand
+- ✅ Validação de formulários com Zod
+- ✅ Componentes UI reutilizáveis (Button, Input, Card, Modal, Badge, Alert)
+- ✅ Hooks customizados (useLocalStorage, useDebounce, useMediaQuery, etc.)
+- ✅ Serviços de API com Axios e interceptors
+- ✅ Utils para formatação e helpers
 
-## Run Locally
+### Backend (Estrutura Pronta)
+- 📋 Serviços de API organizados por módulo
+- 📋 Tipos TypeScript para todas as entidades
+- 📋 Validações de dados com Zod
+- 📋 Tratamento de erros e interceptors
 
-**Prerequisites:**  Node.js
+## 📁 Estrutura do Projeto
 
+```
+/workspace
+├── src/
+│   ├── components/ui/       # Componentes UI reutilizáveis
+│   ├── hooks/               # Hooks customizados
+│   ├── lib/                 # Configurações e validações
+│   ├── services/            # Serviços de API
+│   ├── store/               # Stores Zustand
+│   ├── types/               # Tipos TypeScript
+│   └── utils/               # Funções utilitárias
+├── components/              # Componentes existentes
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
+```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 🛠️ Tecnologias
+
+- **React 19** + **TypeScript**
+- **Vite** - Build tool
+- **Zustand** - Gerenciamento de estado
+- **React Router DOM** - Roteamento
+- **Axios** - Cliente HTTP
+- **Zod** - Validação
+- **Tailwind CSS** - Estilização
+- **Recharts** - Gráficos
+
+## 📦 Instalação
+
+```bash
+npm install
+npm run dev
+```
+
+## 🔐 Autenticação
+
+O sistema utiliza JWT para autenticação com:
+- Token no localStorage
+- Interceptor Axios automático
+- Refresh token
+- Rotas protegidas
+
+## 📊 Módulos
+
+1. **Pedidos** - CRUD, filtros, atribuição
+2. **Entregadores** - Status, favoritos, geolocalização
+3. **Estabelecimentos** - Perfil, integrações
+4. **Financeiro** - Saldo, extrato, relatórios
+5. **Admin** - Dashboard, métricas, gestão
+
+## 🔒 Segurança
+
+- Sanitização de inputs
+- Proteção XSS
+- Validação de formulários
+- Tokens HTTPS only
+
+## 🚀 Próximo: Backend
+
+Para produção, implementar backend com:
+- Node.js + NestJS/Express
+- PostgreSQL/MongoDB
+- JWT authentication
+- WebSockets para tempo real
+- Redis para cache
+
+## 📄 License
+
+MIT
