@@ -75,6 +75,9 @@ export const authorize = (...roles) => {
   };
 };
 
+// Alias for authorize (for consistency)
+export const restrictTo = authorize;
+
 // Generate JWT token
 export const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {

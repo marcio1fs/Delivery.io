@@ -12,6 +12,14 @@ import logger from './utils/logger.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { apiLimiter } from './middleware/rateLimiter.js';
 import authRoutes from './routes/authRoutes.js';
+import restaurantRoutes from './routes/restaurantRoutes.js';
+import productRoutes from './routes/productRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
+import reviewRoutes from './routes/reviewRoutes.js';
+import notificationRoutes from './routes/notificationRoutes.js';
+import geolocationRoutes from './routes/geolocationRoutes.js';
+import mercadoPagoRoutes from './routes/mercadoPagoRoutes.js';
 import setupSocketIO from './services/socketService.js';
 
 // Load environment variables
@@ -61,12 +69,17 @@ app.get('/health', (req, res) => {
 
 // API Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/restaurants', restaurantRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/uploads', uploadRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/geolocation', geolocationRoutes);
+app.use('/api/payments/mercadopago', mercadoPagoRoutes);
 
-// Placeholder routes for other resources (to be implemented)
-app.use('/api/restaurants', express.Router());
-app.use('/api/products', express.Router());
-app.use('/api/orders', express.Router());
-app.use('/api/users', express.Router());
+// Servir arquivos estáticos para uploads
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Swagger documentation route (to be configured)
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
@@ -95,6 +108,9 @@ const server = app.listen(PORT, async () => {
 
 // Setup Socket.IO
 const io = setupSocketIO(server);
+
+// Store io instance for use in routes
+app.set('io', io);
 
 // Graceful shutdown
 process.on('SIGTERM', () => {

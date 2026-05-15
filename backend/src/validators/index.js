@@ -158,3 +158,21 @@ export const paginationValidator = [
     .withMessage('Limit must be between 1 and 100')
     .toInt(),
 ];
+
+export const restaurantIdValidator = [
+  param('id')
+    .isMongoId()
+    .withMessage('Invalid restaurant ID'),
+];
+
+export const productIdValidator = [
+  param('id')
+    .isMongoId()
+    .withMessage('Invalid product ID'),
+];
+
+export const orderIdValidator = [
+  param('id')
+    .isMongoId()
+    .withMessage('Invalid order ID'),
+];

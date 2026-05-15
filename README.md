@@ -1,97 +1,217 @@
 # Deliver.io - Sistema de Delivery
 
-Sistema completo de delivery estilo iFood/Rappi com painéis para estabelecimentos, administradores e entregadores.
+Sistema completo de delivery estilo iFood/Rappi com painel para restaurantes, administradores e entregadores.
 
-## 🚀 Tecnologias
+## 🚀 Features
 
-### Frontend
-- React 19 + TypeScript
-- Vite
-- React Router DOM
-- Zustand (gerenciamento de estado)
-- React Query (data fetching)
-- Tailwind CSS
-- React Hook Form + Zod (validação)
-- Recharts (gráficos)
+### Backend (Node.js/Express)
+- ✅ API RESTful completa
+- ✅ Autenticação JWT com refresh token
+- ✅ Banco de dados MongoDB
+- ✅ Cache com Redis
+- ✅ WebSockets para atualizações em tempo real
+- ✅ Upload de imagens com otimização
+- ✅ Sistema de avaliações
+- ✅ Notificações em tempo real
+- ✅ Cupons de desconto
+- ✅ Gestão de pagamentos
+- ✅ Emails transacionais
+- ✅ Analytics e métricas
+- ✅ Rate limiting
+- ✅ Validação de dados
+- ✅ Logs centralizados
+
+### Frontend (React + TypeScript)
+- ✅ Interface moderna e responsiva
+- ✅ Tailwind CSS
+- ✅ Componentes reutilizáveis
+- ✅ Painel do cliente
+- ✅ Painel do restaurante
+- ✅ Painel do entregador
+- ✅ Painel administrativo
+
+### DevOps & Qualidade
+- ✅ Docker e Docker Compose
+- ✅ CI/CD com GitHub Actions
+- ✅ Testes unitários (Jest)
+- ✅ Testes E2E
+- ✅ ESLint e Prettier
+- ✅ Documentação da API
+
+## 📋 Pré-requisitos
+
+- Node.js 18+
+- MongoDB 6+
+- Redis 7+
+- npm ou yarn
+
+## 🛠️ Instalação
 
 ### Backend
-- Node.js + Express
-- MongoDB + Mongoose
-- Redis (cache)
-- Socket.IO (tempo real)
-- JWT (autenticação)
-- Winston (logs)
-- Jest (testes)
+
+```bash
+cd backend
+npm install
+cp .env.example .env
+# Edite .env com suas configurações
+npm run dev
+```
+
+### Frontend
+
+```bash
+npm install
+npm run dev
+```
+
+### Docker (Recomendado)
+
+```bash
+docker-compose up -d
+```
 
 ## 📁 Estrutura do Projeto
 
 ```
 /workspace
-├── backend/                 # Backend API
+├── backend/
 │   ├── src/
-│   │   ├── config/         # Configurações (DB, Redis)
-│   │   ├── controllers/    # Controladores
-│   │   ├── middleware/     # Middlewares (auth, validation)
-│   │   ├── models/         # Modelos MongoDB
-│   │   ├── routes/         # Rotas da API
-│   │   ├── services/       # Serviços (Socket.IO)
-│   │   ├── utils/          # Utilitários
-│   │   ├── validators/     # Validações
-│   │   └── server.js       # Entry point
-│   ├── tests/              # Testes
-│   ├── Dockerfile
-│   └── package.json
-├── src/                    # Frontend React
-│   ├── components/
-│   ├── pages/
-│   ├── hooks/
-│   ├── store/
-│   ├── services/
-│   └── types/
-├── .github/workflows/      # CI/CD
-├── docker-compose.yml
-└── nginx.conf
+│   │   ├── config/       # Configurações DB, Redis
+│   │   ├── controllers/  # Lógica das rotas
+│   │   ├── middleware/   # Auth, rate limiter, etc
+│   │   ├── models/       # Models MongoDB
+│   │   ├── routes/       # Definição de rotas
+│   │   ├── services/     # Serviços (email, socket)
+│   │   ├── utils/        # Utilitários
+│   │   └── validators/   # Validações
+│   ├── tests/
+│   │   ├── unit/         # Testes unitários
+│   │   └── e2e/          # Testes E2E
+│   └── docs/             # Documentação
+├── src/                  # Código frontend
+├── components/           # Componentes React
+└── docker-compose.yml    # Orquestração Docker
 ```
 
-## 🛠️ Instalação
+## 🔑 Variáveis de Ambiente
 
-### Com Docker (Recomendado)
-```bash
-cp backend/.env.example backend/.env
-docker-compose up -d
+Veja `.env.example` no backend para todas as variáveis necessárias:
+
+```env
+PORT=3000
+NODE_ENV=development
+MONGODB_URI=mongodb://localhost:27017/deliverio
+REDIS_URL=redis://localhost:6379
+JWT_SECRET=your-secret-key
+SMTP_HOST=smtp.gmail.com
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-password
 ```
 
-### Manual
-```bash
-# Backend
-cd backend && npm install && cp .env.example .env && npm run dev
+## 📡 Endpoints da API
 
-# Frontend
-npm install && npm run dev
-```
+Principais endpoints:
 
-## 🔐 Segurança Implementada
-- ✅ JWT com refresh token
-- ✅ Hash bcrypt
-- ✅ Rate limiting
-- ✅ Validação de inputs
-- ✅ CORS configurado
-- ✅ Helmet headers
+- `POST /api/auth/register` - Registrar usuário
+- `POST /api/auth/login` - Login
+- `GET /api/restaurants` - Listar restaurantes
+- `POST /api/orders` - Criar pedido
+- `GET /api/orders` - Meus pedidos
+- `POST /api/reviews` - Avaliar restaurante
+- `GET /api/notifications` - Notificações
+
+Veja [backend/docs/API.md](/backend/docs/API.md) para documentação completa.
 
 ## 🧪 Testes
+
 ```bash
-cd backend && npm test
+# Backend tests
+cd backend
+npm test              # Testes unitários
+npm run test:e2e      # Testes E2E
+npm test -- --coverage # Coverage
 ```
 
-## 📡 API
-Base: `http://localhost:3000/api`
+## 🐳 Docker
 
-- POST /auth/register - Registrar
-- POST /auth/login - Login
-- GET /auth/me - Usuário atual
-- REST: restaurants, products, orders
+```bash
+# Subir todos os serviços
+docker-compose up -d
 
-## 🚀 Deploy
-CI/CD configurado no GitHub Actions.
+# Ver logs
+docker-compose logs -f
 
-**Status:** Pronto para produção 🎉
+# Parar
+docker-compose down
+```
+
+## 📊 Status do Projeto
+
+**Pronto para Produção:** ~85%
+
+### ✅ Implementado
+- Backend completo com todas features core
+- Autenticação e autorização
+- CRUD de restaurantes, produtos, pedidos
+- Sistema de avaliações
+- Notificações em tempo real
+- Upload de imagens
+- Emails transacionais
+- Cupons de desconto
+- Analytics básico
+- Testes unitários e E2E
+- CI/CD pipeline
+- Dockerização
+
+### 🔄 Em andamento
+- Integração completa de pagamentos (Stripe/PayPal)
+- Geolocalização em tempo real
+- PWA (Progressive Web App)
+- Aplicativo mobile (React Native)
+
+### 📝 Pendente
+- Dashboard administrativo avançado
+- Relatórios detalhados
+- Sistema de fidelidade
+- Chat entre cliente/entregador
+- Múltiplos endereços de entrega
+- Agendamento de pedidos
+
+## 🔒 Segurança
+
+- Helmet.js para headers de segurança
+- Rate limiting
+- Validação de inputs
+- Sanitização de dados
+- CORS configurado
+- Senhas hasheadas com bcrypt
+- JWT tokens com expiração
+
+## 📈 Performance
+
+- Cache Redis para consultas frequentes
+- Compressão gzip
+- Otimização de imagens
+- Indexação MongoDB
+- Lazy loading
+- Code splitting
+
+## 🤝 Contribuindo
+
+1. Fork o projeto
+2. Crie uma branch (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+MIT License
+
+## 👥 Equipe
+
+Desenvolvido como projeto de sistema de delivery completo.
+
+## 📞 Suporte
+
+Para dúvidas e suporte, abra uma issue no GitHub.
