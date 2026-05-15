@@ -1,92 +1,97 @@
-# Deliver.io - Sistema de Gestão de Entregas
+# Deliver.io - Sistema de Delivery
 
-Sistema profissional e robusto para gestão de entregas, similar ao iFood/Rappi, com painéis para estabelecimentos, administradores e entregadores.
+Sistema completo de delivery estilo iFood/Rappi com painéis para estabelecimentos, administradores e entregadores.
 
-## 🚀 Funcionalidades Implementadas
+## 🚀 Tecnologias
 
 ### Frontend
-- ✅ Estrutura de componentes React com TypeScript
-- ✅ Gerenciamento de estado com Zustand
-- ✅ Validação de formulários com Zod
-- ✅ Componentes UI reutilizáveis (Button, Input, Card, Modal, Badge, Alert)
-- ✅ Hooks customizados (useLocalStorage, useDebounce, useMediaQuery, etc.)
-- ✅ Serviços de API com Axios e interceptors
-- ✅ Utils para formatação e helpers
+- React 19 + TypeScript
+- Vite
+- React Router DOM
+- Zustand (gerenciamento de estado)
+- React Query (data fetching)
+- Tailwind CSS
+- React Hook Form + Zod (validação)
+- Recharts (gráficos)
 
-### Backend (Estrutura Pronta)
-- 📋 Serviços de API organizados por módulo
-- 📋 Tipos TypeScript para todas as entidades
-- 📋 Validações de dados com Zod
-- 📋 Tratamento de erros e interceptors
+### Backend
+- Node.js + Express
+- MongoDB + Mongoose
+- Redis (cache)
+- Socket.IO (tempo real)
+- JWT (autenticação)
+- Winston (logs)
+- Jest (testes)
 
 ## 📁 Estrutura do Projeto
 
 ```
 /workspace
-├── src/
-│   ├── components/ui/       # Componentes UI reutilizáveis
-│   ├── hooks/               # Hooks customizados
-│   ├── lib/                 # Configurações e validações
-│   ├── services/            # Serviços de API
-│   ├── store/               # Stores Zustand
-│   ├── types/               # Tipos TypeScript
-│   └── utils/               # Funções utilitárias
-├── components/              # Componentes existentes
-├── package.json
-├── tsconfig.json
-└── vite.config.ts
+├── backend/                 # Backend API
+│   ├── src/
+│   │   ├── config/         # Configurações (DB, Redis)
+│   │   ├── controllers/    # Controladores
+│   │   ├── middleware/     # Middlewares (auth, validation)
+│   │   ├── models/         # Modelos MongoDB
+│   │   ├── routes/         # Rotas da API
+│   │   ├── services/       # Serviços (Socket.IO)
+│   │   ├── utils/          # Utilitários
+│   │   ├── validators/     # Validações
+│   │   └── server.js       # Entry point
+│   ├── tests/              # Testes
+│   ├── Dockerfile
+│   └── package.json
+├── src/                    # Frontend React
+│   ├── components/
+│   ├── pages/
+│   ├── hooks/
+│   ├── store/
+│   ├── services/
+│   └── types/
+├── .github/workflows/      # CI/CD
+├── docker-compose.yml
+└── nginx.conf
 ```
 
-## 🛠️ Tecnologias
+## 🛠️ Instalação
 
-- **React 19** + **TypeScript**
-- **Vite** - Build tool
-- **Zustand** - Gerenciamento de estado
-- **React Router DOM** - Roteamento
-- **Axios** - Cliente HTTP
-- **Zod** - Validação
-- **Tailwind CSS** - Estilização
-- **Recharts** - Gráficos
-
-## 📦 Instalação
-
+### Com Docker (Recomendado)
 ```bash
-npm install
-npm run dev
+cp backend/.env.example backend/.env
+docker-compose up -d
 ```
 
-## 🔐 Autenticação
+### Manual
+```bash
+# Backend
+cd backend && npm install && cp .env.example .env && npm run dev
 
-O sistema utiliza JWT para autenticação com:
-- Token no localStorage
-- Interceptor Axios automático
-- Refresh token
-- Rotas protegidas
+# Frontend
+npm install && npm run dev
+```
 
-## 📊 Módulos
+## 🔐 Segurança Implementada
+- ✅ JWT com refresh token
+- ✅ Hash bcrypt
+- ✅ Rate limiting
+- ✅ Validação de inputs
+- ✅ CORS configurado
+- ✅ Helmet headers
 
-1. **Pedidos** - CRUD, filtros, atribuição
-2. **Entregadores** - Status, favoritos, geolocalização
-3. **Estabelecimentos** - Perfil, integrações
-4. **Financeiro** - Saldo, extrato, relatórios
-5. **Admin** - Dashboard, métricas, gestão
+## 🧪 Testes
+```bash
+cd backend && npm test
+```
 
-## 🔒 Segurança
+## 📡 API
+Base: `http://localhost:3000/api`
 
-- Sanitização de inputs
-- Proteção XSS
-- Validação de formulários
-- Tokens HTTPS only
+- POST /auth/register - Registrar
+- POST /auth/login - Login
+- GET /auth/me - Usuário atual
+- REST: restaurants, products, orders
 
-## 🚀 Próximo: Backend
+## 🚀 Deploy
+CI/CD configurado no GitHub Actions.
 
-Para produção, implementar backend com:
-- Node.js + NestJS/Express
-- PostgreSQL/MongoDB
-- JWT authentication
-- WebSockets para tempo real
-- Redis para cache
-
-## 📄 License
-
-MIT
+**Status:** Pronto para produção 🎉
